@@ -22,9 +22,10 @@ Selectize.define('drip_option_template', function(options) {
   // pass them through to Selectize
   for (var i = 0; i < selectOptions.length; i++) {
     if (Object.keys(selectOptions[i].dataset).length > 0) {
+      this.options[selectOptions[i].value]['data'] = {};
       data_attrs = Object.keys(selectOptions[i].dataset);
       for (var j = 0; j < data_attrs.length; j++) {
-        this.options[selectOptions[i].value][data_attrs[j]] = selectOptions[i].dataset[data_attrs[j]];
+        this.options[selectOptions[i].value].data[data_attrs[j]] = selectOptions[i].dataset[data_attrs[j]];
       }
     }
   }
