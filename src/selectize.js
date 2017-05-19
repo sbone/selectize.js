@@ -1694,19 +1694,23 @@ $.extend(Selectize.prototype, {
 	 * element to reflect the current state.
 	 */
 	updateOriginalInput: function(opts) {
-		var i, n, options, label, self = this;
+		var i, n, options, label, data_markup, self = this;
 		opts = opts || {};
 
 		if (self.tagType === TAG_SELECT) {
 			options = [];
 			for (i = 0, n = self.items.length; i < n; i++) {
-				label = self.options[self.items[i]][self.settings.labelField] || '';
-        options.push('<option value="' +
-          escape_html(self.items[i]) +
-          '" data-combotrigger="' + (self.options[self.items[i]].combotrigger ? true : false) + '"' +
-          (self.options[self.items[i]].type ? ' data-type="' + self.options[self.items[i]].type : '') + '"' +
-          (self.options[self.items[i]].path ? ' data-path="' + self.options[self.items[i]].path : '') + '"' +
-          ' selected="selected">' + escape_html(label) + '</option>');
+        label = self.options[self.items[i]][self.settings.labelField] || '';
+        data_markup = '';
+
+        if (self.options[self.items[i]].hasOwnProperty('data')) {
+          var data_obj = self.options[self.items[i]].data;
+          for (var j = 0; j < Object.keys(data_obj).length; j++) {
+            data_markup += ' data-' + Object.keys(data_obj)[j] + '="' + data_obj[Object.keys(data_obj)[j]] + '"';
+          }
+        }
+
+        options.push('<option value="' + escape_html(self.items[i]) + '"' + data_markup + ' selected="selected">' + escape_html(label) + '</option>');
 			}
 			if (!options.length && !this.$input.attr('multiple')) {
 				options.push('<option value="" selected="selected"></option>');
