@@ -1705,6 +1705,7 @@ $.extend(Selectize.prototype, {
           escape_html(self.items[i]) +
           '" data-combotrigger="' + (self.options[self.items[i]].combotrigger ? true : false) + '"' +
           (self.options[self.items[i]].type ? ' data-type="' + self.options[self.items[i]].type : '') + '"' +
+          (self.options[self.items[i]].path ? ' data-path="' + self.options[self.items[i]].path : '') + '"' +
           ' selected="selected">' + escape_html(label) + '</option>');
 			}
 			if (!options.length && !this.$input.attr('multiple')) {
