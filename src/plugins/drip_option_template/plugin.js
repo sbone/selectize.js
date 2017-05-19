@@ -15,31 +15,17 @@
 Selectize.define('drip_option_template', function(options) {
   var self = this;
   var original = self.setupTemplates;
-
-  // if source <select>'s <option>s have `data-description`
-  // attrs, extract and append to Selectize's `options`
   var selectOptions = self.$input[0].options;
+  var data_attrs;
 
+  // If any `data-attrs` are present on the source `option` els,
+  // pass them through to Selectize
   for (var i = 0; i < selectOptions.length; i++) {
-    if (selectOptions[i].dataset.hasOwnProperty('description')) {
-      this.options[selectOptions[i].value]['description'] = selectOptions[i].dataset.description;
-    }
-    // for combo-selects
-    // if original <option> has `data-combotrigger` attribute,
-    // this adds it to the option data, which will pass it
-    // to the rendered option
-		if (selectOptions[i].dataset.hasOwnProperty('combotrigger')) {
-      this.options[selectOptions[i].value]['combotrigger'] = selectOptions[i].dataset.combotrigger;
-    }
-
-    // passes along data-type atrributes
-    if (selectOptions[i].dataset.hasOwnProperty('type')) {
-      this.options[selectOptions[i].value]['type'] = selectOptions[i].dataset.type;
-    }
-
-    // passes along data-type atrributes
-    if (selectOptions[i].dataset.hasOwnProperty('path')) {
-      this.options[selectOptions[i].value]['path'] = selectOptions[i].dataset.path;
+		if (Object.keys(selectOptions[i].dataset).length > 0) {
+      data_attrs = Object.keys(selectOptions[i].dataset);
+      for (var j = 0; j < data_attrs.length; j++) {
+        this.options[selectOptions[i].value][data_attrs[j]] = selectOptions[i].dataset[data_attrs[j]];
+      }
     }
   }
 
