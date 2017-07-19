@@ -38,6 +38,9 @@ Selectize.define('drip_option_template', function(options) {
           escape(data[self.settings.labelField]) +
           (data.description ? '<div class="desc">' + data.description + '</div>' : '') +
           '</div>');
+      },
+      'item': function(data, escape) {
+        return '<div class="item">' + escape(data[self.settings.labelField]) + (this.settings.mode === 'multi' ? '<button class="remove-item">X</button>' : '') + '</div>';
       }
     };
 
