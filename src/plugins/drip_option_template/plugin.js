@@ -40,7 +40,10 @@ Selectize.define('drip_option_template', function(options) {
           '</div>');
       },
       'item': function(data, escape) {
-        return '<div class="item">' + escape(data[self.settings.labelField]) + (this.settings.mode === 'multi' ? '<button class="remove-item">X</button>' : '') + '</div>';
+        return '<div class="item">' +
+          escape(data[self.settings.labelField]) +
+          (this.settings.mode === 'multi' ? '<button class="remove-item"><svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1"><g id="Octicons" stroke="none" stroke-width="1" fill="none"><g transform="translate(0.000000, -2.000000)"><polygon id="Shape" points="7.48 8 11.23 11.75 9.75 13.23 6 9.48 2.25 13.23 0.77 11.75 4.52 8 0.77 4.25 2.25 2.77 6 6.52 9.75 2.77 11.23 4.25"></polygon></g></g></svg></button>' : '') +
+          '</div>';
       }
     };
 
