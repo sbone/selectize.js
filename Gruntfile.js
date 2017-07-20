@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-replace');
+	grunt.loadNpmTasks('grunt-shell');
 
 	grunt.registerTask('configure', [
 		'clean:pre',
@@ -230,9 +231,17 @@ module.exports = function(grunt) {
 				'src/**/*.js'
 			],
 			tasks: [
-				'concat:js',
-				'build_standalone'
+				'shell:build_with_plugins',
+				'shell:copy_lib'
 			]
+		},
+		shell: {
+			build_with_plugins: {
+				command: 'grunt --plugins=drip_custom_width,drip_delete_on_mousedown,drip_option_template'
+			},
+			copy_lib: {
+				command: 'cp dist/js/standalone/selectize.js ~/drip/drip/vendor/assets/javascripts/selectize.js'
+			}
 		}
 	});
 };
