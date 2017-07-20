@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var fs = require('fs');
 
 module.exports = function(grunt) {
@@ -240,7 +242,7 @@ module.exports = function(grunt) {
 				command: 'grunt --plugins=drip_custom_width,drip_delete_on_mousedown,drip_option_template'
 			},
 			copy_lib: {
-				command: 'cp dist/js/standalone/selectize.js ~/drip/drip/vendor/assets/javascripts/selectize.js'
+				command: 'cp dist/js/standalone/selectize.js ' + process.env.DEST
 			}
 		}
 	});
