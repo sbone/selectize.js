@@ -14,8 +14,12 @@ Selectize.define('drip_delete_on_mousedown', function(options) {
   this.onMouseDown = (function(e) {
     var $target = $(e.target);
     if ($target.hasClass('remove-item')) {
+      self.settings.openOnFocus = false;
       var value = $target.parents('.item').data('value');
       self.removeItem(value);
+    }
+    else {
+      self.settings.openOnFocus = true;
     }
 
     original.apply(self, arguments);
