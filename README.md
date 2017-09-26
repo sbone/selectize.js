@@ -93,6 +93,14 @@ grunt --plugins=*
 grunt --plugins=remove_button,restore_on_backspace
 ```
 
+### Drip Build
+
+# build selectize
+`grunt --plugins=drip_custom_width,drip_delete_on_mousedown,drip_option_template`
+
+# copy standalone selectize into app
+`cp dist/js/standalone/selectize.js [path/to/drip]/vendor/assets/javascripts/`
+
 ### Contributing
 When issuing a pull request:
 
