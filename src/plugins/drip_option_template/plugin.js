@@ -22,9 +22,10 @@ Selectize.define('drip_option_template', function(options) {
   // pass them through to Selectize
   for (var i = 0; i < selectOptions.length; i++) {
     if (Object.keys(selectOptions[i].dataset).length > 0) {
+      this.options[selectOptions[i].value]['data'] = {};
       data_attrs = Object.keys(selectOptions[i].dataset);
       for (var j = 0; j < data_attrs.length; j++) {
-        this.options[selectOptions[i].value][data_attrs[j]] = selectOptions[i].dataset[data_attrs[j]];
+        this.options[selectOptions[i].value].data[data_attrs[j]] = selectOptions[i].dataset[data_attrs[j]];
       }
     }
   }
@@ -35,7 +36,7 @@ Selectize.define('drip_option_template', function(options) {
       'option': function(data, escape) {
         return ('<div class="option">' +
           escape(data[self.settings.labelField]) +
-          (data.description ? '<div class="desc">' + data.description + '</div>' : '') +
+          (data.data && data.data.description ? '<div class="desc">' + data.data.description + '</div>' : '') +
           '</div>');
       },
       'item': function(data, escape) {
